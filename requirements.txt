@@ -10,5 +10,7 @@ langchain-pinecone
 llama-cpp-python
 langchain_community
 
+protobuf
+
 
 #-e .
