@@ -4,13 +4,13 @@ pinecone-client
 langchain==0.0.225
 flask
 huggingface-hub==0.19.4
-python-dotenv==1.0.1
+python-dotenv
 pypdf
 langchain-pinecone
 llama-cpp-python
 langchain_community
 
-protobuf
+-e .
 
 
-#-e .
+
