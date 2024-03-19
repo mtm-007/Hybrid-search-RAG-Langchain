@@ -1,9 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+    .chat-container {
+        max-width: 400px;
+        margin: 20px auto;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+    .chat-header {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        text-align: center;
+    }
+    .chat-body {
+        padding: 20px;
+        overflow-y: scroll;
+        max-height: 300px;
+    }
+    .message {
+        background-color: #f1f0f0;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .user-message {
+        background-color: #d4e8ec;
+        text-align: right;
+    }
+    .bot-message {
+        background-color: #e2e3e5;
+    }
+    .input-container {
+        border-top: 1px solid #ccc;
+        padding: 10px;
+    }
+    input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+</head>
 <body>
+    <div class="chat-container">
+        <div class="chat-header">Chatbot</div>
+        <div class="chat-body" id="chat-body">
+            <div class="message bot-message">Hello! How can I help you today?</div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
 
-<h1>Welcome</h1>
-<p>This the Rag based llm chatbot UI inprogress....</p>
-
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('user-input').value;
+            var chatBody = document.getElementById('chat-body');
+            var userMessage = '<div class="message user-message">' + userInput + '</div>';
+            chatBody.innerHTML += userMessage;
+            document.getElementById('user-input').value = '';
+            // You can handle the user input here and generate a bot response
+            var botResponse = '<div class="message bot-message">I received: ' + userInput + '</div>';
+            setTimeout(function() {
+                chatBody.innerHTML += botResponse;
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1000); // Simulating a delay before the bot responds
+        }
+    </script>
 </body>
 </html>
