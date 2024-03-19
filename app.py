@@ -1,16 +1,19 @@
 from flask import Flask, render_template, jsonify, request
 from src.utils import download_embedding_model
 import pinecone
+from langchain.callbacks.manager import CallbackManager
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain.chains import LLMChain
+from langchain_community.llms import LlamaCpp
 from langchain_pinecone import PineconeVectorStore
-#from langchain.vectorstores import Pinecone
 from langchain_community.vectorstores import Pinecone
 from langchain.prompts import PromptTemplate
-#from langchain.llms import CTransformers
-from langchain_community.llms import CTransformers
 from langchain.chains import RetrievalQA
+from llama_cpp import Llama
 from dotenv import load_dotenv
 import os
 from src.prompt import *
+
 
 app = Flask(__name__)
 
@@ -32,10 +35,17 @@ PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "q
 
 chain_type_kwargs = {"prompt": PROMPT}
 
-llm = CTransformers(model= "./model/gguf/llama-2-7b-chat.Q3_K_M.gguf",
-                    model_type="llama",
-                    config={'max_new_tokens': 512,
-                            'temperature': 0.7})
+callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
+
+llm = LlamaCpp(
+    model_path= "../model/gguf/llama-2-7b-chat.Q3_K_M.gguf",
+    n_gpu_layers= -1,
+    n_batch= 512,
+    max_tokens= 512,
+    temperature=0.7,
+    callback_manager=callback_manager,
+    #verbose=True # Verbose is required to pass to the callback manager
+)
 
 QA = RetrievalQA.from_chain_type(
     llm=llm,
