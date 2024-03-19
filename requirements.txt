@@ -9,6 +9,9 @@ pypdf
 langchain-pinecone
 llama-cpp-python
 langchain_community
+wandb
+chromadb
+
 
 -e .
 

@@ -2,7 +2,8 @@ from flask import Flask, render_template, jsonify, request
 from src.utils import download_embedding_model
 import pinecone
 from langchain_pinecone import PineconeVectorStore
-from langchain.vectorstores import Pinecone
+#from langchain.vectorstores import Pinecone
+from langchain_community.vectorstores import Pinecone
 from langchain.prompts import PromptTemplate
 #from langchain.llms import CTransformers
 from langchain_community.llms import CTransformers
@@ -23,7 +24,7 @@ pinecone.Pinecone(
    api_key=os.getenv("PINECONE_API_KEY"),  
    environment=os.getenv("PINECONE_ENV"),  
 )
-index_name = "medical-chatbot-vdb"
+index_name = "medical-chatbot-vector-index"
 
 docsearch = PineconeVectorStore.from_existing_index(index_name, embedding)
 
@@ -31,7 +32,7 @@ PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "q
 
 chain_type_kwargs = {"prompt": PROMPT}
 
-llm = CTransformers(model= "../model/llama-2-7b-chat.ggmlv3.q3_K_M.bin",
+llm = CTransformers(model= "./model/gguf/llama-2-7b-chat.Q3_K_M.gguf",
                     model_type="llama",
                     config={'max_new_tokens': 512,
                             'temperature': 0.7})
@@ -49,5 +50,5 @@ def index():
     return render_template('chat.html')
 
 
-if __name__== 'main':
-    app.run(debug=True)
+if __name__== '__main__':
+    app.run(host="0.0.0.0", port=8080, debug=True)
