@@ -38,7 +38,7 @@ chain_type_kwargs = {"prompt": PROMPT}
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 
 llm = LlamaCpp(
-    model_path= "../model/gguf/llama-2-7b-chat.Q3_K_M.gguf",
+    model_path= "./model/gguf/llama-2-7b-chat.Q3_K_M.gguf",
     n_gpu_layers= -1,
     n_batch= 512,
     max_tokens= 512,

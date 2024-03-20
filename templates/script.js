@@ -1,8 +1,8 @@
 const chatInput = document.querySelector("#chat-input");
-const sendButton = document.querySelector("#send-btn");
+const sendButton = document.querySelector("#send-button");
 const chatContainer = document.querySelector(".chat-container");
-const themeButton = document.querySelector("#theme-btn");
-const deleteButton = document.querySelector("#delete-btn");
+const themeButton = document.querySelector("#theme-button");
+const deleteButton = document.querySelector("#delete-button");
 
 let userText = null;
 
