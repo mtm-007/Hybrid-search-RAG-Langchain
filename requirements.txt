@@ -1,13 +1,14 @@
 ctransformers==0.2.5
 sentence-transformers==2.2.2
 pinecone-client
+pinecone-text
 langchain==0.0.225
 flask
 huggingface-hub==0.19.4
 python-dotenv
 pypdf
 langchain-pinecone
-llama-cpp-python
+llama-cpp-python==0.2.56
 langchain_community
 wandb
 chromadb
