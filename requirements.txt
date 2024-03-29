@@ -12,6 +12,9 @@ llama-cpp-python==0.2.56
 langchain_community
 wandb
 chromadb
+pandas
+youtube_transcript_api
+srt
 
 
 -e .

@@ -27,7 +27,7 @@ pinecone.Pinecone(
    api_key=os.getenv("PINECONE_API_KEY"),  
    environment=os.getenv("PINECONE_ENV"),  
 )
-index_name = "medical-chatbot-vector-index"
+index_name = "med-chatbot-hybrid"
 
 docsearch = PineconeVectorStore.from_existing_index(index_name, embedding)
 
