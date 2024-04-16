@@ -17,13 +17,13 @@ def load_pdf_data(data):
 
 #create chunks of text
 def text_chunk_splitter(extracted_data):
-    text_split = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    text_split = RecursiveCharacterTextSplitter(chunk_size=750, chunk_overlap=150)
     text_chunk = text_split.split_documents(extracted_data)
 
     return text_chunk
 
 #download embedding model
-def download_embedding_model():
-    embedding= HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+def download_embedding_asy_model():
+    embedding= HuggingFaceEmbeddings(model_name="sentence-transformers/msmarco-distilbert-base-v3")
 
     return embedding

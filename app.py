@@ -1,5 +1,7 @@
-from flask import Flask, render_template, jsonify, request
 from src.utils import download_embedding_model
+from src.prompt import *
+
+from flask import Flask, render_template, jsonify, request
 import pinecone
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
@@ -12,7 +14,7 @@ from langchain.chains import RetrievalQA
 from llama_cpp import Llama
 from dotenv import load_dotenv
 import os
-from src.prompt import *
+
 
 
 app = Flask(__name__)
@@ -21,7 +23,7 @@ load_dotenv()
 PINECONE_API_KEY = os.environ.get('PINECONE_API_KEY')
 PINECONE_API_ENV = os.environ.get('PINECONE_API_ENV')
 
-embedding = download_embedding_model()
+embedding = download_embedding_asy_model()
 
 pinecone.Pinecone(
    api_key=os.getenv("PINECONE_API_KEY"),  
